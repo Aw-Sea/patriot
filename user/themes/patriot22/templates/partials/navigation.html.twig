@@ -1,0 +1,18 @@
+{% import 'macros/macros.html.twig' as macros %}
+
+{% set external_links_config = [
+  {
+    url: 'https://historydepositarium.ru/region/penzapobeda/',
+    title: 'Лица Победы',
+    insert_after: 'Видео'  
+  },
+  {
+    url: 'https://героиспецоперации.рф',
+    title: 'Герои Спецоперации',
+    insert_after: 'Лица Победы'  
+  }
+] %}
+
+<ul {{ tree ? 'class="tree"' : '' }}>
+  {{ macros.nav_loop(pages, external_links_config) }}
+</ul>

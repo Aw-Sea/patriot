@@ -1,0 +1,7 @@
+---
+title: 'Село Обвал, Тамалинский район'
+media_order: iWckauNVOdTiS_MdJw2JHAEYn0D3EPGjJ94p0gosBfgJ0pXeO9Q52o2S7-eGq6XrmfK4-E4mPuia6IQNHMbkCov0.jpg
+---
+
+![iWckauNVOdTiS_MdJw2JHAEYn0D3EPGjJ94p0gosBfgJ0pXeO9Q52o2S7-eGq6XrmfK4-E4mPuia6IQNHMbkCov0](iWckauNVOdTiS_MdJw2JHAEYn0D3EPGjJ94p0gosBfgJ0pXeO9Q52o2S7-eGq6XrmfK4-E4mPuia6IQNHMbkCov0.jpg "iWckauNVOdTiS_MdJw2JHAEYn0D3EPGjJ94p0gosBfgJ0pXeO9Q52o2S7-eGq6XrmfK4-E4mPuia6IQNHMbkCov0")
+село Обвал, Тамалинский район

@@ -1,0 +1,322 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+    <h1>{{ page.title }}</h1>
+
+
+    {# Контейнер для карты и сайдбара #}
+
+<div id="penza-map"></div>
+
+
+        
+
+        <div class="map-sidebar" id="map-sidebar">
+            <div id="sidebar-content">
+                <h3>Выберите район на карте</h3>
+                <p>Кликните на интересующий район</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="districts-accordion">
+        {% for district in page.find('/pamyatniki').children %}
+            <div class="district">
+                <div class="district-header">
+                    <a href="{{ district.url }}" class="district-link">{{ district.title }}</a>
+                    <button class="toggle-btn" aria-expanded="false">
+                        <span class="arrow">▼</span>
+                    </button>
+                </div>
+                
+                <div class="places-panel">
+                    {% if district.children.count > 0 %}
+                        {% for place in district.children %}
+                            <a href="{{ place.url }}" class="place-link">
+                                {{ place.title }}
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-places">Памятники не добавлены</p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <style>
+
+    #layer4, #layer5 {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+
+/* Стили для интерактивных элементов */
+#penza-map .interactive-district {
+    fill-opacity: 0.6;
+    stroke: #646464;
+    stroke-width: 1px;
+    transition: all 0.3s ease;
+}
+
+#penza-map .interactive-district:hover {
+    fill-opacity: 0.8;
+    stroke: #ff0000;
+    stroke-width: 2px;
+}
+     .map-interactive-container {
+            display: flex;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .svg-map-container {
+            flex: 3;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #penza-map svg {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Стили для интерактивных элементов */
+        #penza-map path.district {
+            fill: #fefee9;
+            fill-opacity: 0.3;
+            stroke: #646464;
+            stroke-width: 0.5;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        #penza-map path.district:hover {
+            fill-opacity: 0.7;
+            stroke: red;
+        }
+        
+
+
+            .svg-map-container {
+            max-width: 100%;
+            margin: 30px 0;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .svg-map-container svg {
+            width: 100%;
+            height: auto;
+        }
+
+        .districts-accordion {
+            max-width: 800px;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+        }
+        
+        .district-header {
+            display: flex;
+            align-items: center;
+            background: #f5f5f5;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .district-link {
+            flex-grow: 1;
+            padding: 15px;
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        
+        .district-link:hover {
+            background: #e9e9e9;
+        }
+        
+        .toggle-btn {
+            padding: 15px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .places-panel {
+            padding: 0 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+        
+        .place-link {
+            display: block;
+            padding: 10px 0;
+            color: #0066cc;
+            text-decoration: none;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .place-link:hover {
+            color: #004499;
+        }
+        
+        .no-places {
+            padding: 10px 0;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .arrow {
+            transition: transform 0.3s;
+        }
+        
+        .district.active .arrow {
+            transform: rotate(180deg);
+        }
+        
+        .district.active .places-panel {
+            max-height: 500px;
+            padding: 10px 15px;
+        }
+    </style>
+
+    <script>
+    
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const district = this.closest('.district');
+                district.classList.toggle('active');
+                
+                // Закрываем другие открытые панели
+                document.querySelectorAll('.district').forEach(d => {
+                    if (d !== district) d.classList.remove('active');
+                });
+            });
+        });
+
+        // Открываем аккордеон при переходе по ссылке района
+        document.querySelectorAll('.district-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (e.target === this) { // Проверяем, что кликнули именно на ссылку
+                    const district = this.closest('.district');
+                    district.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Сначала объявляем функцию
+    function initMapInteractivity() {
+        // Динамические данные из Grav
+        const districtData = {
+            {% for district in page.find('/pamyatniki').children %}
+                '{{ district.folder|lower }}': { 
+                    name: '{{ district.title }}',
+                    url: '{{ district.url }}',
+                    places: {{ district.children.count }}
+                },
+            {% endfor %}
+        };
+
+        // Статические данные для районов (на случай отсутствия в Grav)
+        const staticDistrictData = {
+            'path3009': { name: 'Пензенский', places: 15, url: '/pamyatniki/penzensky' },
+            'path3015': { name: 'Бессоновский', places: 8, url: '/pamyatniki/bessonovsky' },
+            // Добавьте остальные районы по аналогии
+        };
+
+        // Объединяем данные
+        const allDistricts = { ...staticDistrictData, ...districtData };
+
+        // Находим элементы после их загрузки
+        const paths = document.querySelectorAll('#penza-map svg path');
+        
+        paths.forEach(path => {
+            const districtId = path.id.toLowerCase();
+            const district = allDistricts[districtId] || { 
+                name: 'Район', 
+                url: '#',
+                places: 0 
+            };
+
+            // Добавляем класс и базовые стили
+            path.classList.add('district');
+            path.style.fill = '#fefee9';
+            path.style.fillOpacity = '0.3';
+            path.style.transition = 'all 0.3s ease';
+            path.style.cursor = 'pointer';
+
+            // Обработка наведения
+            path.addEventListener('mouseenter', () => {
+                path.style.fill = '#FFC107';
+                path.style.fillOpacity = '0.7';
+            });
+
+            path.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('active')) {
+                    this.style.fill = '#fefee9';
+                    this.style.fillOpacity = '0.3';
+                }
+            });
+
+            // Обработка клика
+            path.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                // Снимаем выделение со всех районов
+                paths.forEach(p => {
+                    p.style.fill = '#fefee9';
+                    p.style.fillOpacity = '0.3';
+                    p.classList.remove('active');
+                });
+
+                // Выделяем текущий
+                this.style.fill = '#4CAF50';
+                this.style.fillOpacity = '0.9';
+                this.classList.add('active');
+
+                // Обновляем сайдбар
+                const sidebar = document.getElementById('sidebar-content');
+                if (sidebar) {
+                    sidebar.innerHTML = `
+                        <h3>${district.name}</h3>
+                        <p>Памятников: ${district.places}</p>
+                        <a href="${district.url}" class="button">Подробнее →</a>
+                    `;
+                }
+            });
+        });
+    }
+
+    // Затем проверяем загрузку SVG
+    const checkSVG = setInterval(() => {
+        const svg = document.querySelector('#penza-map svg');
+        if (svg) {
+            clearInterval(checkSVG);
+            initMapInteractivity(); // Теперь функция точно определена
+        }
+    }, 100);
+});
+
+document.getElementById('penza-map').querySelector('svg').style.transform = 'scale(0.5)';
+</script>
+
+<script>
+fetch('{{ url('theme://svg/penza-map.svg') }}')
+    .then(r => r.text())
+    .then(svg => {
+        document.getElementById('penza-map').innerHTML = svg;
+        initMapInteractivity(); // Ваша функция для кликов
+    });
+</script>
+{% endblock %}

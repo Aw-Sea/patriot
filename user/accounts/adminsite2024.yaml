@@ -1,0 +1,16 @@
+state: enabled
+email: aw1239318@gmail.com
+fullname: 'Alex Wood'
+title: Admin
+hashed_password: $2a$10$MwgWVeOwOWiDhoohCpx4tO33hXEpgkkY6feFEWb0tSeWSTn0/E0JG
+language: ru
+content_editor: default
+twofa_enabled: false
+twofa_secret: QMNH6E5MYRQT325GRFMTCXILLFDANJ7X
+avatar: {  }
+access:
+  site:
+    login: true
+  admin:
+    login: true
+    super: true

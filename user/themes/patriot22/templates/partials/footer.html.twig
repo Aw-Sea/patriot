@@ -1,0 +1,50 @@
+<footer id="footer" class="footer mt-auto">
+    <div class="container {{ grid_size }}">
+        <div class="row align-items-center">
+            <div class="col-md-4 text-center text-md-left mb-2 mb-md-0">
+                <strong>Жить! Помнить! Знать!</strong>
+            </div>
+            
+            <div class="col-md-4 text-center mb-2 mb-md-0">
+                <small>© {{ "now"|date("Y") }} Историческая память</small>
+            </div>
+            
+            <div class="col-md-4 text-center text-md-right">
+                <a href="#" class="text-white mx-1"><i class="fa fa-vk"></i></a>
+                <a href="#" class="text-white mx-1"><i class="fa fa-telegram"></i></a>
+                <a href="#" class="text-white mx-1"><i class="fa fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: #1e3c72; /* Темно-синий цвет */
+    font-size: 0.9rem;
+}
+
+.footer a:hover {
+    color: #ffd700 !important; /* Золотой при наведении */
+}
+
+/* Фиксация внизу */
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.wrapper {
+    flex: 1 0 auto;
+}
+.footer {
+    flex-shrink: 0;
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+}
+</style>

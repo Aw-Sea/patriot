@@ -1,0 +1,7 @@
+---
+title: 'Рабочий посёлок Тамала, Пензенская область'
+media_order: WegQYJx-OJ5aBOFaSWRph5Om-FLs2u8h2pp2MBM5WSQzFQzfFlcJZQJnWLKM3sOvElT93KCNGenZEp9hzjHIdrS8.jpg
+---
+
+![WegQYJx-OJ5aBOFaSWRph5Om-FLs2u8h2pp2MBM5WSQzFQzfFlcJZQJnWLKM3sOvElT93KCNGenZEp9hzjHIdrS8](WegQYJx-OJ5aBOFaSWRph5Om-FLs2u8h2pp2MBM5WSQzFQzfFlcJZQJnWLKM3sOvElT93KCNGenZEp9hzjHIdrS8.jpg "WegQYJx-OJ5aBOFaSWRph5Om-FLs2u8h2pp2MBM5WSQzFQzfFlcJZQJnWLKM3sOvElT93KCNGenZEp9hzjHIdrS8")
+рабочий посёлок Тамала, Пензенская область

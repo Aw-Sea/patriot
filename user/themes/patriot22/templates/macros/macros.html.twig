@@ -1,0 +1,50 @@
+{% macro nav_loop(page, external_links_config = null) %}
+  {% import _self as macros %}
+  
+  {% set menu_items = [] %}
+  
+  {# Собираем все пункты меню в массив #}
+  {% for p in page.children.visible %}
+    {% set active_page = (p.active or p.activeChild) ? 'active' : '' %}
+    {% set menu_items = menu_items|merge([{
+      type: 'internal',
+      url: p.url,
+      title: p.menu,
+      class: active_page
+    }]) %}
+  {% endfor %}
+  
+  {# Вставляем внешние ссылки в нужные позиции #}
+  {% if external_links_config %}
+    {% for link in external_links_config %}
+      {% if link.insert_after %}
+        {% set position = 0 %}
+        {% for item in menu_items %}
+          {% if item.title == link.insert_after %}
+            {% set position = loop.index %}
+          {% endif %}
+        {% endfor %}
+        
+        {% if position > 0 %}
+          {% set menu_items = menu_items|slice(0, position)|merge([{
+            type: 'external',
+            url: link.url,
+            title: link.title,
+            class: ''
+          }])|merge(menu_items|slice(position)) %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
+  {# Выводим итоговое меню #}
+  {% for item in menu_items %}
+    <li>
+      <a href="{{ item.url }}" 
+         class="{{ item.class }}"
+         {% if item.type == 'external' %}target="_blank" rel="noopener"{% endif %}>
+        {{ item.title }}
+      </a>
+    </li>
+  {% endfor %}
+{% endmacro %}

@@ -1,0 +1,7 @@
+---
+title: 'Село Ульяновка, Тамалинский район'
+media_order: QbD27ziCEYIFfL4cgwhkpzyT3I4keI3ff4cbm4zqbzFNKnbg-2XEDMn5tKHdoHjDxZtcoxyBxVSGfQpgegF4hE4C.jpg
+---
+
+![QbD27ziCEYIFfL4cgwhkpzyT3I4keI3ff4cbm4zqbzFNKnbg-2XEDMn5tKHdoHjDxZtcoxyBxVSGfQpgegF4hE4C](QbD27ziCEYIFfL4cgwhkpzyT3I4keI3ff4cbm4zqbzFNKnbg-2XEDMn5tKHdoHjDxZtcoxyBxVSGfQpgegF4hE4C.jpg "QbD27ziCEYIFfL4cgwhkpzyT3I4keI3ff4cbm4zqbzFNKnbg-2XEDMn5tKHdoHjDxZtcoxyBxVSGfQpgegF4hE4C")
+село Ульяновка, Тамалинский район

@@ -1,0 +1,9 @@
+<a href="{{ home_url }}" class="logo-text" style="
+    font-family: {{ theme_config.custom_logo_font }};
+    color: {{ theme_config.custom_logo_color }};
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+">
+    {{ theme_config.custom_logo_text|default(site.title) }}
+</a>

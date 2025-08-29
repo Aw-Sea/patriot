@@ -1,0 +1,7 @@
+---
+title: 'Село Дуровка, Тамалинский район'
+media_order: H_qAC2vL8I1dkGTIHiKfLRc-Nr6aNBCQGZ5Mvwib6jI0aqcTEWe4aqF97W7zsWEKILOJQDt75rmz0SkSPUXB8wT5.jpg
+---
+
+![H_qAC2vL8I1dkGTIHiKfLRc-Nr6aNBCQGZ5Mvwib6jI0aqcTEWe4aqF97W7zsWEKILOJQDt75rmz0SkSPUXB8wT5](H_qAC2vL8I1dkGTIHiKfLRc-Nr6aNBCQGZ5Mvwib6jI0aqcTEWe4aqF97W7zsWEKILOJQDt75rmz0SkSPUXB8wT5.jpg "H_qAC2vL8I1dkGTIHiKfLRc-Nr6aNBCQGZ5Mvwib6jI0aqcTEWe4aqF97W7zsWEKILOJQDt75rmz0SkSPUXB8wT5")
+село Дуровка, Тамалинский район

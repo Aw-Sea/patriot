@@ -1,0 +1,128 @@
+/* Основные настройки документа */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Структура страницы */
+body {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5; /* Фон основной страницы */
+}
+
+/* Боковые фоновые изображения */
+.side-bg {
+  position: fixed; /* Изменено с absolute на fixed */
+  top: 0;
+  bottom: 0;
+  width: 300px;
+  z-index: -1;
+}
+
+.side-bg.left {
+  left: 0;
+  background: url('../images/lf.png') repeat-y;
+}
+
+.side-bg.right {
+  right: 0;
+  background: url('../images/rg.png') repeat-y;
+}
+
+/* Основное содержимое */
+.wrapper {
+  flex: 1 0 auto;
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  width: calc(100% - 600px); /* Учитываем ширину боковых фонов */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Шапка сайта */
+#header {
+  background-color: #354692 !important;
+  color: white;
+}
+
+.navbar {
+  background-color: #ffffff;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#header .navbar-section {
+  height: 35px !important;
+}
+
+/* Основной контент */
+.rowbody {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Ссылки */
+a {
+  color: #a50000;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #d40000;
+  text-decoration: none;
+}
+
+/* Подвал сайта */
+.footer {
+  flex-shrink: 0;
+  width: 100%;
+  background-color: #1e3c72;
+  color: white;
+  padding: 20px 0;
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 2;
+}
+
+.footer a {
+  color: white;
+}
+
+.footer a:hover {
+  color: #ffd700 !important;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Адаптивность */
+@media (max-width: 1400px) {
+  .side-bg {
+    width: 200px;
+  }
+  .wrapper {
+    width: calc(100% - 400px);
+  }
+}
+
+@media (max-width: 992px) {
+  .side-bg {
+    display: none;
+  }
+  .wrapper {
+    width: 100%;
+  }
+}

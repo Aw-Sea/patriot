@@ -1,0 +1,46 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+    <h1>{{ page.title }}</h1>
+
+        {# Временная отладка #}
+    {{ dump(page.collection()) }}
+
+
+    {% set collection = page.collection() %}
+<pre>
+Collection items: {{ collection|length }}
+Routes: {{ collection|map(p => p.route)|join(', ') }}
+</pre>
+
+
+{% set districts = page.find('/ru/turisicheskii-marshrut/districts').children %}
+{% for district in districts %}
+    {{ district.title }}
+    {% for place in district.children %}
+        - {{ place.title }}
+    {% endfor %}
+{% endfor %}
+
+
+    <div class="districts-accordion">
+        {% for district in page.collection() %}
+            <div class="district">
+                <h2 class="district-title">
+                    {{ district.title }}
+                </h2>
+                
+                <div class="places-list">
+                    {% for place in page.collection({
+                        'items': {'@page.children': district.route},
+                        'order': {'by': 'folder', 'dir': 'asc'}
+                    }) %}
+                        <div class="place">
+                            <a href="{{ place.url }}">{{ place.title }}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
